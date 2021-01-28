@@ -3,6 +3,10 @@ package com.atguigu.bigdata.spark.core.req
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
+/**
+ * 方法三：
+ * 从数据源头分开处理，累加，减少了shuffle，最终只有一个reduceByKey，进一步优化执行速度
+ */
 object Spark03_Req1_HotCategoryTop10Analysis2 {
 
     def main(args: Array[String]): Unit = {

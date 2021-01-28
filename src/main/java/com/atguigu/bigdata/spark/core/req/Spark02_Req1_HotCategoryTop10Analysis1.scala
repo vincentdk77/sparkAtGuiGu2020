@@ -3,6 +3,9 @@ package com.atguigu.bigdata.spark.core.req
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
+/**
+ * 方法二：
+ */
 object Spark02_Req1_HotCategoryTop10Analysis1 {
 
     def main(args: Array[String]): Unit = {

@@ -6,6 +6,10 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 import scala.collection.mutable
 
+/**
+ * 方法四：
+ * 使用累加器实现，避免了shuffle算子的使用，性能提升
+ */
 object Spark04_Req1_HotCategoryTop10Analysis3 {
 
     def main(args: Array[String]): Unit = {

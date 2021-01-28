@@ -3,6 +3,13 @@ package com.atguigu.bigdata.spark.core.req
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
+/**
+ * 需求二：
+ * 求top10热门品类的top10活跃session统计 （session 的点击统计）
+ *
+ * 1、先获取top10的热门品类list，过滤源数据得到所有的top10的热门品类数据
+ * 2、
+ */
 object Spark05_Req2_HotCategoryTop10SessionAnalysis {
 
     def main(args: Array[String]): Unit = {
@@ -49,7 +56,8 @@ object Spark05_Req2_HotCategoryTop10SessionAnalysis {
         // 5. 将分组后的数据进行点击量的排序，取前10名
         val resultRDD = groupRDD.mapValues(
             iter => {
-                iter.toList.sortBy(_._2)(Ordering.Int.reverse).take(10)
+//                iter.toList.sortBy(_._2)(Ordering.Int.reverse).take(10)
+                iter.toList.sortWith((a,b) =>a._2>b._2).take(10)
             }
         )
 
@@ -58,6 +66,12 @@ object Spark05_Req2_HotCategoryTop10SessionAnalysis {
 
         sc.stop()
     }
+
+    /**
+     * 求top热门品类
+     * @param actionRDD
+     * @return
+     */
     def top10Category(actionRDD:RDD[String]) = {
         val flatRDD: RDD[(String, (Int, Int, Int))] = actionRDD.flatMap(
             action => {
